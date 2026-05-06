@@ -9,7 +9,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
 
-  "https://ide-frontend.onrender.com", // your frontend URL
+  "https://ide-with-real-time-collabration-2.onrender.com", // your frontend URL
 ];
 
 app.use(
@@ -34,7 +34,7 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://ide-frontend.onrender.com"],
+    origin: ["http://localhost:3000", "https://ide-with-real-time-collabration-2.onrender.com"],
 
     methods: ["GET", "POST"],
 
