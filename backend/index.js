@@ -5,13 +5,7 @@ import path from "path";
 import axios from "axios";
 
 const app = express();
-const cors = require("cors");
 
-app.use(cors({
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST"],
-  credentials: true
-}));
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
