@@ -53,7 +53,9 @@ io.on("connection", (socket) => {
   socket.on("join", ({ roomId, userName }) => {
     if (currentRoom) {
       socket.leave(currentRoom);
-      rooms.get(currentRoom).delete(currentUser);
+      if (rooms.has(currentRoom)) {
+  rooms.get(currentRoom).delete(currentUser);
+}
       io.to(currentRoom).emit("userJoined", Array.from(rooms.get(currentRoom)));
     }
 
@@ -68,7 +70,7 @@ io.on("connection", (socket) => {
 
     rooms.get(roomId).add(userName);
 
-    io.to(roomId).emit("userJoined", Array.from(rooms.get(currentRoom)));
+    io.to(roomId).emit("userJoined", Array.from(rooms.get(roomId)));
   });
 
   socket.on("codeChange", ({ roomId, code }) => {
@@ -77,7 +79,9 @@ io.on("connection", (socket) => {
 
   socket.on("leaveRoom", () => {
     if (currentRoom && currentUser) {
-      rooms.get(currentRoom).delete(currentUser);
+      if (rooms.has(currentRoom)) {
+  rooms.get(currentRoom).delete(currentUser);
+}
       io.to(currentRoom).emit("userJoined", Array.from(rooms.get(currentRoom)));
 
       socket.leave(currentRoom);
@@ -118,7 +122,9 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     if (currentRoom && currentUser) {
-      rooms.get(currentRoom).delete(currentUser);
+      if (rooms.has(currentRoom)) {
+  rooms.get(currentRoom).delete(currentUser);
+}
       io.to(currentRoom).emit("userJoined", Array.from(rooms.get(currentRoom)));
     }
     console.log("user Disconnected");
